@@ -8,7 +8,7 @@ const getActivityController = (req, res, next) => {
 }
 
 const modifyActivityController =(req, res, next) => {
-    
+    console.log("controlador para modificar una actividad por ID");
 }
 
 const deleteActivityController =(req, res, next) => {
