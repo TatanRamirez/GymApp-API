@@ -2,15 +2,15 @@ const newEmployeeController = async (req, res, next) => {
 
 }
 
-const getEmployeeController = (req, res, next) => {
+const getEmployeeController = async (req, res, next) => {
 
 }
 
-const modifyEmployeeController =(req, res, next) => {
+const modifyEmployeeController = async (req, res, next) => {
 
 }
 
-const deleteEmployeeController =(req, res, next) => {
+const deleteEmployeeController = async (req, res, next) => {
 
 }
 
