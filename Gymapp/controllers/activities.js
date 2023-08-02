@@ -1,9 +1,29 @@
 const newActivityController = async (req, res, next) => {
-  console.log('controlador nuevas actividades');
+  try {
+    console.log(req.url);
+    console.log(req.method);
+    console.log(req.body);
+    res.send({
+      status: 'error',
+      message: 'Not implemented',
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 const getActivityController = (req, res, next) => {
-  console.log('controlador para obtener una actividad por ID');
+  try {
+    console.log(req.url);
+    console.log(req.method);
+    console.log(req.body);
+    res.send({
+      status: 'error',
+      message: 'Not implemented',
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 const modifyActivityController = (req, res, next) => {
