@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 
 const {
   newUserController,
@@ -25,7 +26,9 @@ const {
 
 const app = express();
 
+app.use(express.json());
 app.use(morgan('dev'));
+app.use(cors());
 
 //Rutas de usuario
 app.post('/user', newUserController);
@@ -52,8 +55,8 @@ app.use((req, res) => {
   });
 });
 
-//Middleware de gestion de errores
-app.use((error, req, res) => {
+// Middleware de gestion de errores
+app.use((error, req, res, next) => {
   console.error(error);
 
   res.status(error.httpStatus || 500).send({
