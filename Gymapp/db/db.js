@@ -12,7 +12,7 @@ const getConnection = async () => {
       user: MYSQL_USER,
       password: MYSQL_PASSWORD,
       database: MYSQL_DATABASE,
-      timezone: 'Z',
+      timezone: 'local',
     });
   }
   return await pool.getConnection();

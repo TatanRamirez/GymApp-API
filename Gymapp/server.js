@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const morgan = require('morgan');
+const cors = require('cors');
 
 const {
   newUserController,
@@ -27,13 +28,14 @@ const app = express();
 
 app.use(express.json());
 app.use(morgan('dev'));
+app.use(cors());
 
 //Rutas de usuario
 app.post('/user', newUserController);
 app.get('/user/:id', getUserController);
 app.post('/login', loginController);
 
-//Rutas de activiti nes
+//Rutas de activities
 app.post('/activity', newActivityController);
 app.get('/activity/:id', getActivityController);
 app.put('/activity/:id', modifyActivityController);
@@ -53,7 +55,7 @@ app.use((req, res) => {
   });
 });
 
-//Middleware de gestion de errores
+// Middleware de gestion de errores
 app.use((error, req, res, next) => {
   console.error(error);
 
