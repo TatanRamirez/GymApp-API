@@ -8,6 +8,8 @@ async function main() {
 
     console.log('Borrando tablas existentes');
     await connection.query(`DROP TABLE IF EXISTS activities`);
+    await connection.query(`DROP TABLE IF EXISTS user`);
+    await connection.query(`DROP TABLE IF EXISTS employees`);
 
     console.log('Creando tablas)');
     await connection.query(`CREATE TABLE user(
