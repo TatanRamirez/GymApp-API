@@ -4,6 +4,6 @@ const generateError = (message, status) => {
     return error;
 }
 
-module.exports ={
- generateError   
+module.exports = {
+ generateError,  
 }
