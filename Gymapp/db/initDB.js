@@ -8,6 +8,7 @@ async function main() {
 
     console.log('Borrando tablas existentes');
     await connection.query(`DROP TABLE IF EXISTS activities`);
+    await connection.query(`DROP TABLE IF EXISTS user`);
 
     console.log('Creando tablas)');
     await connection.query(`CREATE TABLE user(
@@ -19,15 +20,15 @@ async function main() {
         );
         `);
 
-    await connection.query(`CREATE TABLE employees(
-            id INTEGER PRIMARY KEY AUTO_INCREMENT,
-            email VARCHAR(100) UNIQUE NOT NULL,
-            user_name VARCHAR(100) UNIQUE NOT NULL, 
-            password VARCHAR(100) NOT NULL,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    //await connection.query(`CREATE TABLE likes(
+            //id INTEGER PRIMARY KEY AUTO_INCREMENT,
+            //email VARCHAR(100) UNIQUE NOT NULL,
+            //user_name VARCHAR(100) UNIQUE NOT NULL, 
+            //password VARCHAR(100) NOT NULL,
+            //created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 
-        );
-        `);
+        //);
+        //`);
 
     await connection.query(`CREATE TABLE activities(
             id INTEGER PRIMARY KEY AUTO_INCREMENT,
