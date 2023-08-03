@@ -9,6 +9,7 @@ async function main() {
     console.log('Borrando tablas existentes');
     await connection.query(`DROP TABLE IF EXISTS activities`);
     await connection.query(`DROP TABLE IF EXISTS user`);
+    await connection.query(`DROP TABLE IF EXISTS employees`);
 
     console.log('Creando tablas)');
     await connection.query(`CREATE TABLE user(
@@ -28,10 +29,16 @@ async function main() {
             image VARCHAR(100), 
             typology VARCHAR(100),
             muscle_group VARCHAR(100),
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+            time_min(5,2)
   
         );
         `);
+
+        GRANT INSERT TO activities TO  administrador;
+
+     INSERT INTO activities (id , activity_name, description, image, typology, muscle_group, created_ad);
+
   } catch (error) {
     console.error(error);
   } finally {
@@ -40,3 +47,5 @@ async function main() {
   }
 }
 main();
+
+
