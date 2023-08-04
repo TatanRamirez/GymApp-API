@@ -35,7 +35,9 @@ async function main() {
         );
         `);
 
-        GRANT INSERT TO activities TO  administrador;
+        GRANT INSERT ON activities TO  administrador;
+
+        GRANTS DELETE ON activities TO administrador; 
 
      INSERT INTO activities (id , activity_name, description, image, typology, muscle_group, created_ad);
 
