@@ -17,13 +17,6 @@ const {
   deleteActivityController,
 } = require('./controllers/activities');
 
-const {
-  newEmployeeController,
-  getEmployeeController,
-  modifyEmployeeController,
-  deleteEmployeeController,
-} = require('./controllers/employees');
-
 const app = express();
 
 app.use(express.json());
@@ -40,12 +33,6 @@ app.post('/activity', newActivityController);
 app.get('/activity/:id', getActivityController);
 app.put('/activity/:id', modifyActivityController);
 app.delete('/activity/:id', deleteActivityController);
-
-//Rutas de Employees
-app.post('/employee', newEmployeeController);
-app.get('/employee/:id', getEmployeeController);
-app.put('/employee/:id', modifyEmployeeController);
-app.delete('/employee/:id', deleteEmployeeController);
 
 // Middleware de 404
 app.use((req, res) => {
