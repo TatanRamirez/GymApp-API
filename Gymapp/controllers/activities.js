@@ -1,37 +1,87 @@
+const {
+  modifyActivity,
+  createActivities,
+  getActivityById,
+  deleteById,
+} = require('../db/activities');
+
 const newActivityController = async (req, res, next) => {
   try {
-    console.log(req.url);
-    console.log(req.method);
-    console.log(req.body);
+    const { name, description, image, typology, muscleGroup } = req.body;
+
+    if (!name || !description || !image || !typology || !muscleGroup) {
+      const error = new Error('Debes enviar los valores correctos');
+      error.httpStatus = 400;
+      throw error;
+    }
+    const id = await createActivities(
+      name,
+      description,
+      image,
+      typology,
+      muscleGroup
+    );
+
     res.send({
-      status: 'error',
-      message: 'Not implemented',
+      status: 'Ok',
+      message: 'Activity created with Id: ${id}',
     });
   } catch (error) {
     next(error);
   }
 };
 
-const getActivityController = (req, res, next) => {
+const getActivityController = async (req, res, next) => {
   try {
-    console.log(req.url);
-    console.log(req.method);
-    console.log(req.body);
+    const { id } = req.params;
+    const activity = await getActivityById(id);
     res.send({
-      status: 'error',
-      message: 'Not implemented',
+      status: 'Ok',
+      data: activity,
     });
   } catch (error) {
     next(error);
   }
 };
 
-const modifyActivityController = (req, res, next) => {
-  console.log('controlador para modificar una actividad por ID');
+const modifyActivityController = async (req, res, next) => {
+  try {
+    const { name, description, image, typology, muscleGroup } = req.body;
+    const { id } = req.params;
+    if (!name || !description || !image || !typology || !muscleGroup) {
+      const error = new Error('Debes enviar los valores correctos');
+      error.httpStatus = 400;
+      throw error;
+    }
+    const result = await modifyActivity(
+      id,
+      name,
+      description,
+      image,
+      typology,
+      muscleGroup
+    );
+
+    res.send({
+      status: 'Ok',
+      message: 'Activity updated with Id: ${id}',
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
-const deleteActivityController = (req, res, next) => {
-  console.log('controlador para borrar una actividad por ID');
+const deleteActivityController = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const activity = await deleteById(id);
+    res.send({
+      status: 'Ok',
+      data: activity,
+    });
+  } catch (error) {
+    next(error);
+  }
 };
 
 module.exports = {
