@@ -9,7 +9,7 @@ async function main() {
     console.log('Borrando tablas existentes');
     await connection.query(`DROP TABLE IF EXISTS activities`);
     await connection.query(`DROP TABLE IF EXISTS user`);
-    await connection.query(`DROP TABLE IF EXISTS employees`);
+    await connection.query(`DROP TABLE IF EXISTS likes`);
 
     console.log('Creando tablas)');
     await connection.query(`CREATE TABLE user(
@@ -22,25 +22,32 @@ async function main() {
         );
         `);
 
-    await connection.query(`CREATE TABLE activities(
+    await connection.query(`CREATE TABLE activities (
             id INTEGER PRIMARY KEY AUTO_INCREMENT,
             activity_name VARCHAR(100) UNIQUE NOT NULL,
             description VARCHAR(300) NOT NULL,
             image VARCHAR(100), 
-            typology VARCHAR(100),
-            muscle_group VARCHAR(100),
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-            time_min(5,2)
-  
-        );
+            typology VARCHAR(100) NOT NULL,
+            muscle_group VARCHAR(100) NOT NULL,
+            created_at DATETIME DEFAULT CURRENT_TIMESTAMP     
+          )
         `);
 
-        GRANT INSERT ON activities TO  administrador;
+    connection.query(
+      `CREATE TABLE likes (
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            user_id INT,
+            activity_id INT,
+            FOREIGN KEY (user_id) REFERENCES user(id),
+            FOREIGN KEY (activity_id) REFERENCES activities(id)
+          )`
+    );
 
-        GRANTS DELETE ON activities TO administrador; 
+    //     GRANT INSERT ON activities TO  administrador;
 
-     INSERT INTO activities (id , activity_name, description, image, typology, muscle_group, created_ad);
+    //     GRANTS DELETE ON activities TO administrador;
 
+    //  INSERT INTO activities (id , activity_name, description, image, typology, muscle_group, created_ad);
   } catch (error) {
     console.error(error);
   } finally {
@@ -49,5 +56,3 @@ async function main() {
   }
 }
 main();
-
-
