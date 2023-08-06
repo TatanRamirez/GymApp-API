@@ -16,6 +16,7 @@ const {
   modifyActivityController,
   deleteActivityController,
 } = require('./controllers/activities');
+const { typologyFilter } = require('./db/filterActivities');
 
 const app = express();
 
@@ -33,6 +34,7 @@ app.post('/activity', newActivityController);
 app.get('/activity/:id', getActivityController);
 app.put('/activity/:id', modifyActivityController);
 app.delete('/activity/:id', deleteActivityController);
+app.get('/activity', typologyFilter);
 
 // Middleware de 404
 app.use((req, res) => {
