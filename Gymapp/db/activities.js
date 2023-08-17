@@ -30,7 +30,7 @@ const getActivityById = async (id) => {
     connection = await getConnection();
     const [resultActivity] = await connection.query(
       `
-      SELECT activity_name, description, image, typology, muscle_group FROM activities WHERE id = ? 
+      SELECT a.*, COUNT(l.id) likes FROM activities a LEFT JOIN likes l ON a.id = l.activity_id WHERE a.id = ? ;
       `,
       [id]
     );

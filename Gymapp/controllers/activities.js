@@ -24,7 +24,7 @@ const newActivityController = async (req, res, next) => {
 
     res.send({
       status: 'Ok',
-      message: 'Activity created with Id: ${id}',
+      message: `Activity created with Id: ${id}`,
     });
   } catch (error) {
     next(error);
