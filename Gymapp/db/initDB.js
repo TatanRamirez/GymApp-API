@@ -15,7 +15,7 @@ async function main() {
             email VARCHAR(100) UNIQUE NOT NULL,
             user_name VARCHAR(100) UNIQUE NOT NULL,
             password VARCHAR(100) NOT NULL,
-            role VARCHAR(100) NOT NULL DEFAULT "client",
+            role VARCHAR(100) ENUM("client", "admintrtartor") DEFAULT "normal" NOT NULL DEFAULT "client",
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         );
         `);
