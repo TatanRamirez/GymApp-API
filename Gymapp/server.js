@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
+const fileUpload = require ("express-fileupload") 
 
 const {
   newUserController,
@@ -23,6 +24,8 @@ const { authenticateUser } = require('./middlewares/authenticateUser');
 const app = express();
 
 app.use(express.json());
+//agrego el middelware de fireupload para agregar las imagenes
+app.use(fileUpload);
 app.use(morgan('dev'));
 app.use(cors());
 
