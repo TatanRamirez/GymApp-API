@@ -5,7 +5,7 @@ const { createUser, getUserById, getUserByEmail } = require('../db/user');
 
 const newUserController = async (req, res, next) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
 
     console.log(name);
     console.log(email);
@@ -19,7 +19,7 @@ const newUserController = async (req, res, next) => {
         400
       );
     }
-    const id = await createUser(name, email, password);
+    const id = await createUser(name, email, password, role);
 
     res.send({
       status: 'ok',
@@ -61,7 +61,7 @@ const loginController = async (req, res, next) => {
       throw generateError('la contraseña no coinciden', 401);
     }
     //Creo el playload del token
-    const payload = { id: user.id };
+    const payload = { id: user.id, role: user.role };
     //Firmo el token
     const token = jwt.sign(payload, process.env.SECRET, { expiresIn: '30d' });
     //Envío el token

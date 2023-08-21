@@ -15,7 +15,7 @@ async function main() {
             email VARCHAR(100) UNIQUE NOT NULL,
             user_name VARCHAR(100) UNIQUE NOT NULL,
             password VARCHAR(100) NOT NULL,
-            role VARCHAR(100) ENUM("client", "admintrtartor") DEFAULT "normal" NOT NULL DEFAULT "client",
+            role ENUM("client", "administrator") DEFAULT "normal" NOT NULL DEFAULT "client",
             created_at DATETIME DEFAULT CURRENT_TIMESTAMP
         );
         `);
@@ -53,7 +53,7 @@ async function main() {
     process.exit();
   }
 
-  INSERT INTO user(email, user_name, password, role) 
+  /*INSERT INTO user(email, user_name, password, role) 
   VALUES
   ('tatandeveloper@gymapp.com', 'Tatán', '6789', 'Administrator'),
   ('jesusdeveloper@gymapp.com', 'Jesús', '6789', 'Administrator'),
@@ -79,5 +79,6 @@ async function main() {
   ('Frog pumps', 'Es un buen ejercicio para acabar con el entrenamiento...', '', 'Fuerza/Resistencia', 'Glúteos y piernas'),
   ('Abducciones con banda', 'Podemos realizar este ejercicio en la máquina, en bipedestación...', '', 'Fuerza/Resistencia', 'Glúteos y piernas'),
   ('Sentadillas búlgaras', 'Este también es un músculo estirador, pero con la particularidad...', '', 'Fuerza/Resistencia', 'Glúteos y piernas');
+  */
 }
 main();

@@ -42,7 +42,7 @@ const getUserById = async (id) => {
 };
 
 // crea un usuario en la base de datos y devuelve su id
-const createUser = async (name, email, password) => {
+const createUser = async (name, email, password, role) => {
   let connection;
   try {
     connection = await getConnection();
@@ -60,10 +60,10 @@ const createUser = async (name, email, password) => {
     const passwordHash = await bcrypt.hash(password, 8);
     // crear el usuario
     const [newUser] = await connection.query(
-      `
-            INSERT INTO user (user_name, email, password) VALUES (?, ?, ?)
+      `?
+            INSERT INTO user (user_name, email, password, role) VALUES (?, ?, ?, ?)
             `,
-      [name, email, passwordHash]
+      [name, email, passwordHash, role]
     );
     //devolver id
     return newUser.insertId;
