@@ -1,17 +1,20 @@
-const { selectUserById } = require ("../db/user");
-const { generateError } = requite ("../helpers");
+const { selectUserById } = require('../db/user');
+const { generateError } = require('../helpers');
 
 const isAdmin = async (req, res, next) => {
-try {
+  try {
     const loggerdUser = await selectUserById(req.auth.id);
 
-if (loggerdUser.role !== "admin"){
-    generateError("Necesitas un administrador para poder borrar un usuario hacer una modificación en las actividades", 403);
-}
-next ();
-} catch (error) {
-    next(error); 
-}
+    if (loggerdUser.role !== 'admin') {
+      generateError(
+        'Necesitas un administrador para poder borrar un usuario hacer una modificación en las actividades',
+        403
+      );
+    }
+    next();
+  } catch (error) {
+    next(error);
+  }
 };
 
-module.exports = isAdmin; 
+module.exports = isAdmin;

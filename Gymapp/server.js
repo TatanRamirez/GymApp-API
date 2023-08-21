@@ -16,6 +16,7 @@ const {
   getActivityController,
   modifyActivityController,
   deleteActivityController,
+  requireAdmin,
 } = require('./controllers/activities');
 const { typologyFilter } = require('./db/filterActivities');
 const { likeActivity } = require('./controllers/likes');
@@ -25,7 +26,7 @@ const app = express();
 
 app.use(express.json());
 //agrego el middelware de fireupload para agregar las imagenes
-app.use(fileUpload);
+app.use(fileUpload());
 app.use(morgan('dev'));
 app.use(cors());
 
@@ -35,10 +36,10 @@ app.get('/user/:id', getUserController);
 app.post('/login', loginController);
 
 //Rutas de activities
-app.post('/activity', newActivityController);
+app.post('/activity', requireAdmin, newActivityController);
 app.get('/activity/:id', getActivityController);
-app.put('/activity/:id', modifyActivityController);
-app.delete('/activity/:id', deleteActivityController);
+app.put('/activity/:id', requireAdmin, modifyActivityController);
+app.delete('/activity/:id', requireAdmin, deleteActivityController);
 app.get('/activity', typologyFilter);
 
 app.post('/activities/:activityId/like', authenticateUser, likeActivity);

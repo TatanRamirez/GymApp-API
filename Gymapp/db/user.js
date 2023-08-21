@@ -60,7 +60,7 @@ const createUser = async (name, email, password, role) => {
     const passwordHash = await bcrypt.hash(password, 8);
     // crear el usuario
     const [newUser] = await connection.query(
-      `?
+      `
             INSERT INTO user (user_name, email, password, role) VALUES (?, ?, ?, ?)
             `,
       [name, email, passwordHash, role]

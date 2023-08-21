@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const {
   modifyActivity,
   createActivities,
@@ -83,10 +84,28 @@ const deleteActivityController = async (req, res, next) => {
     next(error);
   }
 };
+function requireAdmin(req, res, next) {
+  if (!req.headers.authorization) {
+    return res.status(401).send('Unauthorized request');
+  }
+  let token = req.headers.authorization.split(' ')[1];
 
+  if (token === 'null') {
+    return res.status(401).send('Unauthorized request');
+  }
+  let payload = jwt.verify(token, process.env.SECRET);
+  if (!payload) {
+    return res.status(401).send('Unauthorized request');
+  }
+  if (payload.role != 'administrator') {
+    return res.status(401).send('Unauthorized request');
+  }
+  next();
+}
 module.exports = {
   newActivityController,
   getActivityController,
   modifyActivityController,
   deleteActivityController,
+  requireAdmin,
 };

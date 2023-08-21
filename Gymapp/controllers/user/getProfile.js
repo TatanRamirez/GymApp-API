@@ -1,4 +1,4 @@
-const { selectUserById } = require ("../../db/user");
+/*const { selectUserById } = require ("../../db/user");
 
 const getProfile = async (req,res) => {
     const user = await selectUserById(req,auth.id);
@@ -7,4 +7,4 @@ const getProfile = async (req,res) => {
     res.send({status: "ok", data: user});
 };
 
-module.exports = getProfile;
+module.exports = getProfile;*/
