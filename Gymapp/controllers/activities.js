@@ -15,11 +15,14 @@ const newActivityController = async (req, res, next) => {
       error.httpStatus = 400;
       throw error;
     }
+    //los cambios son abajo, en las partes de la descripcion, imagen y tipologia, añadiendo unas rutas para que nos añadan la informacion necesaria.
     const id = await createActivities(
       name,
-      description,
-      image,
-      typology,
+      description imgElement.alt = "Descripción de la imagen";
+      ,
+      image imgElement.src = "ruta/de/la/imagen.jpg";
+      ,
+      typology imgElement.classList.add("imagen-tipo");,
       muscleGroup
     );
 
