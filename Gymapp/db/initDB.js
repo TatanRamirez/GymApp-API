@@ -46,20 +46,13 @@ async function initDB() {
     // GRANTS DELETE ON activities TO administrador;
 
     //  INSERT INTO activities (id , activity_name, description, image, typology, muscle_group, created_ad);
-  } catch (error) {
-    console.error(error);
-  } finally {
-    if (connection) connection.release();
-    process.exit();
-  }
 
   // Primero, asegúrate de que la variable `connection` esté configurada correctamente.
 
   // Inserción de usuarios
   /* await connection.query(`
 INSERT INTO user (email, user_name, password, role) 
-VALUES
-  ('tatandeveloper@gymapp.com', 'Tatán', '6789', 'Administrator'),
+VALUES('tatandeveloper@gymapp.com', 'Tatán', '6789', 'Administrator'),
   ('jesusdeveloper@gymapp.com', 'Jesús', '6789', 'Administrator'),
   ('blasdeveloper@gymapp.com', 'Blasco', '6789', 'Administrator'),
   ('luismartinez.12@gmail.com', 'Luis', '1234', 'Client'),
@@ -72,8 +65,7 @@ VALUES
   // Inserción de actividades
   await connection.query(`
 INSERT INTO activities (Activity_name, Description, Image, Typology, Muscle_group) 
-VALUES
-  ('Press de pecho', 'Es sin duda el ejercicio más conocido...', NULL, 'Fuerza', 'Pecho'),
+VALUES('Press de pecho', 'Es sin duda el ejercicio más conocido...', NULL, 'Fuerza', 'Pecho'),
   ('Flexiones con peso', 'Las flexiones o push up son de lo más eficaces...', NULL, 'Fuerza', 'Pecho'),
   ('Aperturas de pecho', 'Tumbado boca arriba en el suelo o en el banco...', NULL, 'Fuerza', 'Pecho'),
   ('Aperturas en T con TRX', 'Si tienes un TRX en casa o en el gimnasio...', NULL, 'Fuerza', 'Pecho'),
@@ -87,5 +79,11 @@ VALUES
   ('Abducciones con banda', 'Podemos realizar este ejercicio en la máquina, en bipedestación...', NULL, 'Fuerza/Resistencia', 'Glúteos y piernas'),
   ('Sentadillas búlgaras', 'Este también es un músculo estirador, pero con la particularidad...', NULL, 'Fuerza/Resistencia', 'Glúteos y piernas');
 `);*/
+} catch (error) {
+  console.error(error);
+} finally {
+  if (connection) connection.release();
+  process.exit();
+}
 }
 initDB();
