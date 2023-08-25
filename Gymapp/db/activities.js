@@ -19,7 +19,7 @@ const createActivities = async (
     );
     return newActivities.insertId;
   } finally {
-    // if (connection) connection.relese();
+    // connection.relese();
   }
 };
 

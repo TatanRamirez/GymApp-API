@@ -47,10 +47,10 @@ async function initDB() {
 
     //  INSERT INTO activities (id , activity_name, description, image, typology, muscle_group, created_ad);
 
-  // Primero, asegúrate de que la variable `connection` esté configurada correctamente.
+    // Primero, asegúrate de que la variable `connection` esté configurada correctamente.
 
-  // Inserción de usuarios
-  /* await connection.query(`
+    // Inserción de usuarios
+    await connection.query(`
 INSERT INTO user (email, user_name, password, role) 
 VALUES('tatandeveloper@gymapp.com', 'Tatán', '6789', 'Administrator'),
   ('jesusdeveloper@gymapp.com', 'Jesús', '6789', 'Administrator'),
@@ -62,8 +62,8 @@ VALUES('tatandeveloper@gymapp.com', 'Tatán', '6789', 'Administrator'),
   ('lupombo@gmail.com', 'Lucía', '6789', 'Administrator');
 `);
 
-  // Inserción de actividades
-  await connection.query(`
+    //Inserción de actividades
+    await connection.query(`
 INSERT INTO activities (Activity_name, Description, Image, Typology, Muscle_group) 
 VALUES('Press de pecho', 'Es sin duda el ejercicio más conocido...', NULL, 'Fuerza', 'Pecho'),
   ('Flexiones con peso', 'Las flexiones o push up son de lo más eficaces...', NULL, 'Fuerza', 'Pecho'),
@@ -78,12 +78,12 @@ VALUES('Press de pecho', 'Es sin duda el ejercicio más conocido...', NULL, 'Fue
   ('Frog pumps', 'Es un buen ejercicio para acabar con el entrenamiento...', NULL, 'Fuerza/Resistencia', 'Glúteos y piernas'),
   ('Abducciones con banda', 'Podemos realizar este ejercicio en la máquina, en bipedestación...', NULL, 'Fuerza/Resistencia', 'Glúteos y piernas'),
   ('Sentadillas búlgaras', 'Este también es un músculo estirador, pero con la particularidad...', NULL, 'Fuerza/Resistencia', 'Glúteos y piernas');
-`);*/
-} catch (error) {
-  console.error(error);
-} finally {
-  if (connection) connection.release();
-  process.exit();
-}
+`);
+  } catch (error) {
+    console.error(error);
+  } finally {
+    if (connection) connection.release();
+    process.exit();
+  }
 }
 initDB();
