@@ -18,11 +18,9 @@ const newActivityController = async (req, res, next) => {
     //los cambios son abajo, en las partes de la descripcion, imagen y tipologia, añadiendo unas rutas para que nos añadan la informacion necesaria.
     const id = await createActivities(
       name,
-      description imgElement.alt = "Descripción de la imagen";
-      ,
-      image imgElement.src = "ruta/de/la/imagen.jpg";
-      ,
-      typology imgElement.classList.add("imagen-tipo");,
+      description,
+      image,
+      typology,
       muscleGroup
     );
 
