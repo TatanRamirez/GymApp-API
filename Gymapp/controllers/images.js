@@ -1,5 +1,3 @@
-const { imageActivity } = require('../activities.js');
-const images = req.files?.images;
 const sharp = require('sharp');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
@@ -10,9 +8,9 @@ const imageactivity = async (req, res, next) => {
     const images = req.files?.images;
 
     if (images) {
-      const images = sharp(images.data);
+      const image = sharp(images.data);
 
-      const { width, format } = images.metadata();
+      const { width, format } = await image.metadata();
 
       if (width > 300) {
         await sharp(images.data).resize(300);
@@ -22,7 +20,7 @@ const imageactivity = async (req, res, next) => {
 
       const imagesPath = path.join(__dirname, '../../images', imageName);
 
-      await images.toFile(imagesPath);
+      await image.toFile(imagesPath);
     }
   } catch (error) {
     next(error);
