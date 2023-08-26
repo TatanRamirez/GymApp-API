@@ -15,7 +15,7 @@ const newActivityController = async (req, res, next) => {
       error.httpStatus = 400;
       throw error;
     }
-    //los cambios son abajo, en las partes de la descripcion, imagen y tipologia, añadiendo unas rutas para que nos añadan la informacion necesaria.
+   
     const id = await createActivities(
       name,
       description,
