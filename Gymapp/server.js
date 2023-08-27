@@ -62,6 +62,6 @@ app.use((error, req, res, next) => {
   });
 });
 // Lanzamos el servidor
-app.listen(3000, () => {
+app.listen(3306, () => {
   console.log('Servidor funcionando! 🏋️💪');
 });

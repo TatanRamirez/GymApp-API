@@ -26,3 +26,5 @@ const imageactivity = async (req, res, next) => {
     next(error);
   }
 };
+imageactivity(); 
+
