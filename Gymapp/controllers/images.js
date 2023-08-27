@@ -18,7 +18,7 @@ const imageactivity = async (req, res, next) => {
 
       const imageName = `${uuidv4()}.${format}`;
 
-      const imagesPath = path.join(__dirname, '../../images', imageName);
+      const imagesPath = path.join(__dirname, '..','..','images','imageName');
 
       await image.toFile(imagesPath);
     }
