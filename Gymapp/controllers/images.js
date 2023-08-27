@@ -2,18 +2,18 @@ const sharp = require('sharp');
 const path = require('path');
 const { v4: uuidv4 } = require('uuid');
 
-const imageActivity = async (req, res, next) => {
+const imageactivity = async (req, res, next) => {
   try {
     await newUserSchema.validateAsync(req.body);
     const images = req.files?.images;
 
     if (images) {
-      const processedimage = sharp(images.data);
+      const image = sharp(images.data);
 
       const { width, format } = await image.metadata();
 
       if (width > 300) {
-        await sharp(image.data).resize(300);
+        await sharp(images.data).resize(300);
       }
 
       const imageName = `${uuidv4()}.${format}`;
@@ -27,9 +27,9 @@ const imageActivity = async (req, res, next) => {
   }
 };
 
-console.log(imageActivity);
+console.log(imageactivity);
 
 module.exports = {
-  imageActivity
+  imageactivity
 };
 
