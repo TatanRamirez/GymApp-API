@@ -13,7 +13,7 @@ const imageactivity = async (req, res, next) => {
       const { width, format } = await image.metadata();
 
       if (width > 300) {
-        await sharp(images.data).resize(300);
+         await sharp(images.data).resize(300);
       }
 
       const imageName = `${uuidv4()}.${format}`;

@@ -16,10 +16,11 @@ const processAndSavingImg = async (imageData, maxWidth = 300) => {
     }
 
     const imageName = `${uuidv4}.${format}`;
-    const imagePath = path.join (uoloadsPath, imageName); 
+    const imagePath = path.join (imagesPath, imageName); 
     await processedImage.toFile(imagePath);
 
     return imageName;
 }
 
+processAndSavingImg ();
 
