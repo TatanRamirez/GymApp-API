@@ -13,12 +13,12 @@ const imageactivity = async (req, res, next) => {
       const { width, format } = await image.metadata();
 
       if (width > 300) {
-        await sharp(images.data).resize(300);
+         await sharp(images.data).resize(300);
       }
 
       const imageName = `${uuidv4()}.${format}`;
 
-      const imagesPath = path.join(__dirname, '..','..','images','imageName');
+      const imagesPath = path.join(__dirname, '../../images', imageName);
 
       await image.toFile(imagesPath);
     }
@@ -26,5 +26,10 @@ const imageactivity = async (req, res, next) => {
     next(error);
   }
 };
-imageactivity(); 
+
+console.log(imageactivity);
+
+module.exports = {
+  imageactivity
+};
 

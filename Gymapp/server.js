@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const fileUpload = require('express-fileupload');
 
+
 const {
   newUserController,
   getUserController,
@@ -21,6 +22,8 @@ const {
 const { typologyFilter } = require('./db/filterActivities');
 const { likeActivity } = require('./controllers/likes');
 const { authenticateUser } = require('./middlewares/authenticateUser');
+const { activity} = require('./controllers/activities');
+const { imageActivity } = require('./controllers/images')
 
 const app = express();
 
@@ -62,6 +65,10 @@ app.use((error, req, res, next) => {
   });
 });
 // Lanzamos el servidor
-app.listen(3306, () => {
+app.listen(3000, () => {
   console.log('Servidor funcionando! 🏋️💪');
 });
+
+
+
+// Que funcione por favor :))
