@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const sharp = require('sharp');
 const {
   modifyActivity,
   createActivities,
@@ -8,12 +9,13 @@ const {
 
 const newActivityController = async (req, res, next) => {
   try {
-    const { name, description, image, typology, muscleGroup } = req.body;
+    const { name, description, image, typology, muscleGroup } = req.files;
 
     if (!name || !description || !image || !typology || !muscleGroup) {
       const error = new Error('Debes enviar los valores correctos');
       error.httpStatus = 400;
       throw error;
+      await sharp(image.data).resize(300);
     }
    
     const id = await createActivities(
@@ -110,3 +112,4 @@ module.exports = {
   deleteActivityController,
   requireAdmin,
 };
+
