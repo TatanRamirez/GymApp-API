@@ -20,3 +20,6 @@ const isAdmin = async (req, res, next) => {
 };
 
 module.exports = isAdmin;
+
+
+//mas que nada se ha un const error, para que funcione el generate.
