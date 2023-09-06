@@ -21,7 +21,7 @@ function authenticateUser(req, res, next) {
     }
 
     // Asegurarnos de que el token tenga la información necesaria
-    if (!decodedToken || !decodedToken.id) {
+    if (!decodedToken || !decodedToken.id || !decodedToken.role) {
       throw generateError('Token de autenticación inválido', 401);
     }
     // Agregar el usuario y su rol a la solicitud para que otras rutas lo utilicen
