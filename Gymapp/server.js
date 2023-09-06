@@ -17,12 +17,11 @@ const {
   modifyActivityController,
   deleteActivityController,
   requireAdmin,
+  getActivitiesController,
 } = require('./controllers/activities');
 const { typologyFilter } = require('./db/filterActivities');
 const { likeActivity } = require('./controllers/likes');
 const { authenticateUser } = require('./middlewares/authenticateUser');
-const { activity } = require('./controllers/activities');
-//const { imageActivity } = require('./controllers/images')
 
 const app = express();
 
@@ -38,6 +37,7 @@ app.get('/user/:id', getUserController);
 app.post('/login', loginController);
 
 //Rutas de activities
+app.get('/activities', getActivitiesController);
 app.post('/activity', requireAdmin, newActivityController);
 app.get('/activity/:id', getActivityController);
 app.put('/activity/:id', requireAdmin, modifyActivityController);
@@ -67,5 +67,3 @@ app.use((error, req, res, next) => {
 app.listen(3000, () => {
   console.log('Servidor funcionando! 🏋️💪');
 });
-
-// Que funcione por favor :))
