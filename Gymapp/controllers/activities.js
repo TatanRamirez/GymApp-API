@@ -5,30 +5,47 @@ const {
   createActivities,
   getActivityById,
   deleteById,
+  getActivities,
 } = require('../db/activities');
+const { generateError, processAndSavingImg } = require('../helpers');
 
 const newActivityController = async (req, res, next) => {
   try {
-    const { name, description, image, typology, muscleGroup } = req.files;
+    console.log(req.body);
+    console.log(req.files);
 
-    if (!name || !description || !image || !typology || !muscleGroup) {
-      const error = new Error('Debes enviar los valores correctos');
-      error.httpStatus = 400;
-      throw error;
-      await sharp(image.data).resize(300);
+    const { name, description, typology, muscleGroup } = req.body;
+
+    if (
+      !name ||
+      !description ||
+      !typology ||
+      !muscleGroup ||
+      !req.files?.image
+    ) {
+      throw generateError('Debes enviar los valores correctos', 400);
     }
-   
+
+    // validar si existe actividad con el mismo nombre...
+
+    console.log(req.files.image);
+
+    const imageName = await processAndSavingImg(req.files.image.data, 1000);
+
     const id = await createActivities(
       name,
       description,
-      image,
+      imageName,
       typology,
       muscleGroup
     );
 
+    const createdActivity = await getActivityById(id);
+
     res.send({
       status: 'Ok',
       message: `Activity created with Id: ${id}`,
+      data: createdActivity,
     });
   } catch (error) {
     next(error);
@@ -48,27 +65,48 @@ const getActivityController = async (req, res, next) => {
   }
 };
 
-const modifyActivityController = async (req, res, next) => {
+const getActivitiesController = async (req, res, next) => {
   try {
-    const { name, description, image, typology, muscleGroup } = req.body;
-    const { id } = req.params;
-    if (!name || !description || !image || !typology || !muscleGroup) {
-      const error = new Error('Debes enviar los valores correctos');
-      error.httpStatus = 400;
-      throw error;
-    }
-    const result = await modifyActivity(
-      id,
-      name,
-      description,
-      image,
-      typology,
-      muscleGroup
-    );
+    const activities = await getActivities();
 
     res.send({
       status: 'Ok',
-      message: 'Activity updated with Id: ${id}',
+      data: activities,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+const modifyActivityController = async (req, res, next) => {
+  try {
+    if (Object.keys(req.body).length === 0) {
+      throw generateError('Debes enviar algún campo para actualizar', 400);
+    }
+
+    const { id } = req.params;
+
+    const activity = await getActivityById(id);
+
+    if (!activity.id) {
+      throw generateError('La actividad no existe', 404);
+    }
+
+    const updatedActivity = { ...activity, ...req.body };
+
+    if (req.files?.image) {
+      updatedActivity.image = await processAndSavingImg(
+        req.files.image.data,
+        1000
+      );
+    }
+
+    await modifyActivity(updatedActivity);
+
+    res.send({
+      status: 'Ok',
+      message: `Activity updated with Id: ${id}`,
+      data: updatedActivity,
     });
   } catch (error) {
     next(error);
@@ -105,11 +143,12 @@ function requireAdmin(req, res, next) {
   }
   next();
 }
+
 module.exports = {
   newActivityController,
   getActivityController,
   modifyActivityController,
   deleteActivityController,
   requireAdmin,
+  getActivitiesController,
 };
-
