@@ -48,4 +48,15 @@
   
 </ul>
 </p>
+
+<h2>
+    Módulos de Node.js
+</h2>
+
+<ul>
+  <ul>Para instalar los módulos necesarios ejecuta la siguiente línea en tu consola:
+    <li>npm i nodemon bcrypt dotenv express express-fileupload jsonwebtoken morgan mysql2 sharp uuid</li>
+  </ul> 
+</ul>
+
 </body>
