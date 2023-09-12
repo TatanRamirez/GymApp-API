@@ -1,3 +1,4 @@
+const { query } = require('express');
 const { getConnection } = require('./db');
 
 const createActivities = async (
@@ -20,6 +21,35 @@ const createActivities = async (
     return newActivities.insertId;
   } finally {
     // connection.relese();
+  }
+};
+
+const getActivities = async (queryParams) => {
+  let connection;
+
+  try {
+    const { typology, muscle_group } = queryParams;
+    connection = await getConnection();
+
+    let sqlQuery = 'SELECT * FROM activities';
+    const values = [];
+    let clause = 'WHERE';
+
+    if (typology) {
+      sqlQuery += ` ${clause} typology LIKE ?`;
+      values.push(`%${typology}%`);
+      clause = 'AND';
+    }
+
+    if (muscle_group) {
+      sqlQuery += ` ${clause} muscle_group LIKE ?`;
+      values.push(`%${muscle_group}%`);
+    }
+    const [activities] = await connection.query(sqlQuery, values);
+
+    return activities;
+  } finally {
+    if (connection) connection.release();
   }
 };
 
@@ -87,4 +117,5 @@ module.exports = {
   deleteById,
   getActivityById,
   createActivities,
+  getActivities,
 };

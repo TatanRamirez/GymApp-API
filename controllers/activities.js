@@ -67,7 +67,8 @@ const getActivityController = async (req, res, next) => {
 
 const getActivitiesController = async (req, res, next) => {
   try {
-    const activities = await getActivities();
+    console.log(req.query);
+    const activities = await getActivities(req.query);
 
     res.send({
       status: 'Ok',
