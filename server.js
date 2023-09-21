@@ -18,6 +18,7 @@ const {
   deleteActivityController,
   requireAdmin,
   getActivitiesController,
+  //GetLikesByUserId,
 } = require('./controllers/activities');
 const { typologyFilter } = require('./db/filterActivities');
 const { likeActivity } = require('./controllers/likes');
@@ -43,7 +44,7 @@ app.get('/activity/:id', getActivityController);
 app.put('/activity/:id', requireAdmin, modifyActivityController);
 app.delete('/activity/:id', requireAdmin, deleteActivityController);
 app.get('/activity', typologyFilter);
-
+//app.get('activity/likes/:userId', GetLikesByUserId)
 app.post('/activities/:activityId/like', authenticateUser, likeActivity);
 
 // Middleware de 404
