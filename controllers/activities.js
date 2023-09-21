@@ -6,6 +6,7 @@ const {
   getActivityById,
   deleteById,
   getActivities,
+  GetLikesByUserId,
 } = require('../db/activities');
 const { generateError, processAndSavingImg } = require('../helpers');
 
@@ -64,6 +65,21 @@ const getActivityController = async (req, res, next) => {
     next(error);
   }
 };
+
+/*const GetLikesByUserId = => {
+  try {
+    console.log(req.query);
+    const activities = await getActivities(req.query);
+
+    res.send({
+      satatus:'OK',
+      data: activities, 
+    });
+  } catch (error){
+    next (error);
+  }
+};*/
+
 
 const getActivitiesController = async (req, res, next) => {
   try {
@@ -152,4 +168,5 @@ module.exports = {
   deleteActivityController,
   requireAdmin,
   getActivitiesController,
+  GetLikesByUserId,
 };
